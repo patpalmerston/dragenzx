@@ -32,9 +32,9 @@ class CPU:
             0b00010001: self.iret,
             0b10100000: self.add,
             0b10100111: self.cmp_function,
-            # 0b01010100: self.jmp,
-            # 0b01010101: self.jeq,
-            # 0b01010110: self.jne,
+            0b01010100: self.jmp,
+            0b01010101: self.jeq,
+            0b01010110: self.jne,
         }
 
     # accepts the address in RAM and returns the value stored there
@@ -111,6 +111,18 @@ class CPU:
         self.pc = self.reg[op_a]
         return (0, True)
 
+    def jeq(self, op_a, op_b):
+        if self.flag == 0b00000001:
+            self.pc = self.reg[op_a]
+            return(0, True)
+        return (2, True)
+
+    def jne(self, op_a, op_b):
+        if self.flag != 0b00000001:
+            self.pc = self.reg[op_a]
+            return (0, True)
+        return (2, True)
+
     # loading from a file
 
     def load(self, program):
@@ -144,6 +156,7 @@ class CPU:
         # elif op == "SUB": etc
         elif op == "MUL":
             self.reg[reg_a] = (self.reg[reg_a] * self.reg[reg_b])
+
         elif op == "CMP":
             if self.reg[reg_a] > self.reg[reg_b]:
                 self.flag = 0b00000010
