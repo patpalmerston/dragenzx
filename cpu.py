@@ -107,6 +107,10 @@ class CPU:
         self.alu("CMP", op_a, op_b)
         return (3, True)
 
+    def jmp(self, op_a, op_b):
+        self.pc = self.reg[op_a]
+        return (0, True)
+
     # loading from a file
 
     def load(self, program):
