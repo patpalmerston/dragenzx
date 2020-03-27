@@ -17,6 +17,7 @@ class CPU:
         self.pc = 0
         # stack pointer (SP)
         self.sp = 256
+        self.flag = self.reg[4]
 
         # self.mdr = 0
         # Commands
@@ -31,9 +32,9 @@ class CPU:
             0b00010001: self.iret,
             0b10100000: self.add,
             0b10100111: self.cmp_function,
-            0b01010100: self.jmp,
-            0b01010101: self.jeq,
-            0b01010110: self.jne,
+            # 0b01010100: self.jmp,
+            # 0b01010101: self.jeq,
+            # 0b01010110: self.jne,
         }
 
     # accepts the address in RAM and returns the value stored there
