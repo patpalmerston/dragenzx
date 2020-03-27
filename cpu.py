@@ -107,6 +107,10 @@ class CPU:
         # self.pc = next_address
         return (0, True)
 
+    def cmp_function(self, op_a, op_b):
+        self.alu("CMP", op_a, op_b)
+        return (3, True)
+
     # loading from a file
 
     def load(self, program):
