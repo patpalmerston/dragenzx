@@ -101,10 +101,6 @@ class CPU:
         self.pop(2, None)
         next_address = self.reg[2]
         self.pc = next_address
-
-        # next_address = self.ram[self.sp]
-        # self.sp += 1
-        # self.pc = next_address
         return (0, True)
 
     def cmp_function(self, op_a, op_b):
@@ -144,6 +140,13 @@ class CPU:
         # elif op == "SUB": etc
         elif op == "MUL":
             self.reg[reg_a] = (self.reg[reg_a] * self.reg[reg_b])
+        elif op == "CMP":
+            if self.reg[reg_a] > self.reg[reg_b]:
+                self.flag = 0b00000010
+            elif self.reg[reg_a] < self.reg[reg_b]:
+                self.flag = 0b00000100
+            elif self.reg[reg_a] == self.reg[reg_b]:
+                self.flag = 0b00000001
         else:
             raise Exception("Unsupported ALU operation")
 
